@@ -10,18 +10,39 @@ const database = process.env.database;
 const username = process.env.username;
 const password = process.env.password;
 const secret = process.env.secret;
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const uuid = require('uuid').v4;
+
 
 app.use(express.json());
 
 
 
-db.connect({
-    username,password,database
-}).then(() => {  
+// db.connect({
+//     username,password,database
+// }).then(() => {  
     
     
-    console.log("Connected to MongoDb");
-    app.use('/api',api);
+    // console.log("Connected to MongoDb");
+    // app.use('/api',api);
+
+db.connect({username,password,database}).then(() => {
+    app.use('/api', session({
+        genid : (req) => {
+            return uuid();
+        },
+       
+        secret : secret,
+        resave: false,
+        saveUninitialized : true,
+    })
+    ,api);
+    
+}).catch((err) => {
+    console.log(`MongoDb connection Unsuccessful ${err}`);
+
+})
 
     // const movie = new movies({
 
@@ -45,9 +66,9 @@ db.connect({
 
    
 
-}).catch((err) => {
-    console.log(`error connecting DB ${err}`);
-});
+// }).catch((err) => {
+//     console.log(`error connecting DB ${err}`);
+// });
 
 app.get('/', (req,res) => {
     res.send('hello');
