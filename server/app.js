@@ -32,7 +32,7 @@ db.connect({username,password,database}).then(() => {
         genid : (req) => {
             return uuid();
         },
-       
+        store : new MongoStore({client: db.getClient()}),
         secret : secret,
         resave: false,
         saveUninitialized : true,

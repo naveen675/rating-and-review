@@ -15,8 +15,8 @@ const connect = (dbObject) => {
         
 }
 
-const GetClient = () => {
-    mongoose.connection.getClient();
+const getClient = () => {
+    return mongoose.connection.getClient();
 }
 
-module.exports={connect,GetClient};
+module.exports={connect,getClient};
