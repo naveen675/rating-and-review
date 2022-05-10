@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const movieDb = require('../models/movies')
 router.use(express.json());
+const auth = require('../middleware/auth');
 
 
-router.put('/',(req,res)=> {
+
+router.put('/',auth.authenticate,(req,res)=> {
 
     const data = req.body;
     const {rating,id} = data;

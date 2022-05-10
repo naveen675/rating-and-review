@@ -1,9 +1,5 @@
 const express = require('express');
-const app = require('../app');
-const userCredentials = require('../models/userCredentials');
 const router = express.Router();
-const UserCredDb = require('../models/userCredentials')
-const User = require('../models/users');
 router.use(express.json());
 
 

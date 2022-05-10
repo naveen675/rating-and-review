@@ -35,7 +35,7 @@ function Profile() {
                 setUpdateStatus(true);
                 navigate('/profile');
             }
-            else if(response.status === 408){
+            else if(response.status === 401){
                 alert('Session Expired');
                 navigate('/');
             }

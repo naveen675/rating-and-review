@@ -7,6 +7,7 @@ import Profile from './components/profile';
 import Error from './components/error';
 import Register from './components/signup';
 import Header from './components/header';
+import Review from './components/reviews';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/error/:err' element={<Error />}></Route>
         <Route path='/register' element={<Register />}></Route>
+        <Route path='/reviews' element={<Review />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router-dom';
 
 function Form(props) {
 
     const {setFormVisibility,_id} = props;
     const [rating, setRating] = useState();
+
+    const navigate = useNavigate(); 
 
     const HandleClick = () => {
 
@@ -25,7 +28,18 @@ function Form(props) {
 
         const PostData = () => {
 
-            fetch(url,requestOptions).then((response) => {console.log(response)});
+            fetch(url,requestOptions).then((response) => {
+
+                if(response.status === 401){
+                    alert('Session Expired');
+                    navigate('/');
+                }
+                else if(response.status === 201){
+                    navigate('/profile');
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
         }
 
         PostData();

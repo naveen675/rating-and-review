@@ -4,6 +4,7 @@ const router = express.Router();
 const UserCredDb = require('../models/userCredentials')
 const User = require('../models/users');
 router.use(express.json());
+const auth = require('../middleware/auth');
 
 
 router.post('/user', (req,res) => {
@@ -41,18 +42,18 @@ router.post('/user', (req,res) => {
 
 })
 
-router.put('/me', (req,res) => {
+router.put('/me',auth.authenticate, (req,res) => {
 
     const data = req.body;
     const {firstname,lastname,gmail} = data;
 
     const id = req.session.userId;
 
-    if(! id){
-        res.status(408).send("session expired");
-    }
+    // if(! id){
+    //     res.status(408).send("session expired");
+    // }
     
-    else if(! firstname){
+    if(! firstname){
         if(! lastname){
             User.findOneAndUpdate(({'id' : id}, {'gmail' : gmail})).then(() => {res.status(204).send('update Completed')}).catch((err) => {res.status(500).send(err)});
         }
@@ -102,6 +103,12 @@ router.post('/session', (req,res) => {
     }).catch((err) => {
         res.status(500).send(err);
     })
+})
+
+
+router.get('/currentSession', auth.authenticate,(req,res) => {
+
+    res.status(200).send(req.session.userId);
 })
 
 module.exports = router;
