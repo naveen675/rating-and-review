@@ -8,6 +8,7 @@ import Error from './components/error';
 import Register from './components/signup';
 import Header from './components/header';
 import Review from './components/reviews';
+import Footer from './components/footer';
 
 function App() {
 
@@ -15,14 +16,15 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/' element={<Login />}></Route>
+        <Route path='/session' element={<Login />}></Route>
         <Route path='/movie/:_id' element={<Movie />}></Route>
-        <Route path='/home' element={<Home />}></Route>
+        <Route path='/' element={<Home />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/error/:err' element={<Error />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/reviews' element={<Review />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

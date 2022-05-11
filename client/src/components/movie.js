@@ -39,9 +39,16 @@ function Movie() {
     const rating_count = movie.rating_count;
     const id = movie._id;
     const reviews = movie.review;
+    const videoUrl = `https://www.youtube.com/embed/${movie.video_url}`;
+
+
     
     return (
     <div className='movie'>
+
+        <iframe 
+                src={videoUrl}>
+</iframe>
         <p>{title}</p>
         <p>{year}</p>
         { average_rating > 0? <button><span className='rating'>&#11088;</span> {average_rating}</button> : ""}

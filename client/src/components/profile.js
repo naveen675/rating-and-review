@@ -37,7 +37,7 @@ function Profile() {
             }
             else if(response.status === 401){
                 alert('Session Expired');
-                navigate('/');
+                navigate('/session');
             }
         }).catch((err) => {
             navigate(`/error/${err}`);

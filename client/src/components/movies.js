@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import fetch from 'node-fetch';
 import Rating from './rating';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 
 function Movies() {
@@ -30,16 +30,15 @@ function Movies() {
     <div className='movielist'>
       {
           movies.map((movie,index) => {
-              const {_id,title,actors,genre,director,average_rating,rating_count} = movie;
+              const {_id,title,actors,genre,director,average_rating,rating_count,poster} = movie;
               
               return (
                   
                   <div key={index} className='movie'>
                     <button onClick={() => {navigate(`/movie/${_id}`)}}>
-                        <h1>{title}</h1>
-                        <p>{`Actors : ${actors}`}</p>
+                        <img src={poster} alt="poster" ></img><br />
+                        <Link  id="movieLink" to='/movie/${_id}' >{title}</Link><br /><br />
                         { average_rating > 0? <button><span className='rating'>&#11088;</span> {average_rating}</button> : ""}
-                        <button><span className='rating'>&#9734;</span></button>
                         <p className='ratingCount'>{`${rating_count} ratings` }</p>
                         <p>{director}</p>
                     </button>

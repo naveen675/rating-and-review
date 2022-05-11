@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import fetch from 'node-fetch';
 import {Navigate, useNavigate} from 'react-router-dom';
 
-function Login() {
+
+function Login(props) {
 
 
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
-
+    const status = props.status;
     const navigate = useNavigate();
 
 
@@ -34,7 +35,8 @@ function Login() {
             fetch(url,requestOptions).then((response) => {
                 
                 if(response.status === 200){
-                    navigate('/profile')
+                    status = "Logout";
+                    navigate(`/profile`);
                 }
                 else{
                     alert('User Doesn Exist');
@@ -49,6 +51,8 @@ function Login() {
 
 
   return (
+    <>
+  
     <div className='login'>
         <label >username : </label>
         <input type='text' onChange={(event) => {setUsername(event.target.value)}}></input> <br></br>
@@ -56,8 +60,9 @@ function Login() {
         <input type='text' onChange={(event) => {setPassword(event.target.value)}}></input>
         <button onClick={() => {HandleClick()}} >Login</button><br />
         <p>New User ?</p>
-        <button onClick={() => {navigate('/register')}}>Click Here</button>
+        <button onClick={() => {navigate(`/register`)}}>Click Here</button>
     </div>
+    </>
   )
 }
 

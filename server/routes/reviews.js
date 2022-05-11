@@ -26,7 +26,7 @@ router.put('/',auth.authenticate,(req,res) => {
     })
 } )
 
-router.get('/:movieId', auth.authenticate, (req,res) => {
+router.get('/:movieId', (req,res) => {
 
   
 
@@ -37,30 +37,6 @@ router.get('/:movieId', auth.authenticate, (req,res) => {
     movieDb.findOne({'_id': movieId}).then((response) => {
 
         res.status(200).send(response['review'])
-
-        // const data = response['review'];
-        // var filterUser = {};
-        
-        // for(var i =0; i< data.length; i++){
-
-        //     console.log(filterUser);
-
-        //     if(data[i].userId === currentUser){
-
-
-        //         filterUser = data[i];
-                
-        //         break;
-
-        //     }
-        // }
-        // var updatedreviews = data.filter((user) => {
-        //     return (user.userId !== filterUser.userId)
-        // })
-        // //console.log(updatedreviews);
-        // updatedreviews.slice(0,0,filterUser);
-
-        // res.send(updatedreviews);
        
     }).catch((err) => {
         res.status(500).send(err);

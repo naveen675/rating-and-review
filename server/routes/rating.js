@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const movieDb = require('../models/movies')
+const movieDb = require('../models/movies');
 router.use(express.json());
 const auth = require('../middleware/auth');
 

@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
+import Header from './header';
 
-function Register() {
+function Register(props) {
+
+    const status = props.status;
 
 
     const [firstname,setFirstname] = useState('');
@@ -36,7 +39,7 @@ function Register() {
 
             fetch(url,requestOptions).then((response) => {
             if(response.status === 201){
-                navigate('/');
+                navigate(`/session`);
             }
         }).catch((err) => {
             console.log(err);
@@ -47,6 +50,7 @@ function Register() {
 
   return (
 
+    <React.Fragment>
      <div className='register'>
 
         <label>Firstname : </label>
@@ -62,6 +66,8 @@ function Register() {
         <button onClick={() => {HandleClick()}} >Register</button><br />
 
     </div>
+
+    </React.Fragment>
   )
 }
 

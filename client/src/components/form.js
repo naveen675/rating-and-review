@@ -32,7 +32,7 @@ function Form(props) {
 
                 if(response.status === 401){
                     alert('Session Expired');
-                    navigate('/');
+                    navigate('/session');
                 }
                 else if(response.status === 201){
                     navigate('/profile');

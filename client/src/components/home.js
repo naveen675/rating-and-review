@@ -1,11 +1,16 @@
 import React from 'react'
 import Movies from './movies';
+import Header from './header';
 
 function Home() {
   return (
-    <div>
-      <Movies />
-    </div>
+
+    <React.Fragment>
+      <div className='content'>
+        <Movies />
+      </div>
+
+    </React.Fragment>
   )
 }
 

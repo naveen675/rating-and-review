@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import fetch from 'node-fetch';
+import { useNavigate } from 'react-router-dom';
 
 
 function Review(props) {
 
 
+    const navigate = useNavigate();
     const {movieId} = props;
     const [reviewAvailable,setReviewAvailable] = useState(false);
     const [input,setInput] = useState('');
@@ -50,6 +52,13 @@ function Review(props) {
                 
                 fetchReviews();
             }
+            else if(response.status === 401){
+                alert('Session expired login Again');
+                navigate('/session');
+                
+            }
+        }).catch((err) => {
+            console.log(err)
         })
 
 
