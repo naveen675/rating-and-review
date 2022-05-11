@@ -46,11 +46,10 @@ function Movie() {
     return (
     <div className='movie'>
 
-        <iframe 
-                src={videoUrl}>
-</iframe>
-        <p>{title}</p>
-        <p>{year}</p>
+
+        <h1>{title}</h1>
+        <iframe src={videoUrl}></iframe>        
+        <p>{`Year ${year}`}</p>
         { average_rating > 0? <button><span className='rating'>&#11088;</span> {average_rating}</button> : ""}
         <button><span className='rating' onClick={() => {setFormVisibility(true)}}>&#9734;</span></button>
         {formVisibility && <Form setFormVisibility = {setFormVisibility} _id={_id} />}

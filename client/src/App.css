@@ -119,12 +119,16 @@ body{
 }
 
 .movie{
+
+  font-family: "Nunito Sans", sans-serif;
+  margin-top: 100px;
   padding-left: 40px;
 }
 
 .movie iframe{
-  margin-top : 100px;
-  height: 25rem;
+  margin-top : 40px;
+  border: 0;
+  height: 30rem;
   width: 70%;
   
 }

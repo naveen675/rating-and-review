@@ -2,6 +2,7 @@ const express = require('express');
 const { authenticate } = require('../middleware/auth');
 const router = express.Router();
 const movieDb = require('../models/movies')
+const userDb = require('../models/users');
 router.use(express.json());
 const auth = require('../middleware/auth');
 
@@ -36,7 +37,21 @@ router.get('/:movieId', (req,res) => {
 
     movieDb.findOne({'_id': movieId}).then((response) => {
 
-        res.status(200).send(response['review'])
+       // var data = response['review'];
+
+        //console.log(data);
+
+        // for(var i =0; i<data.length;i++){
+            
+        //     userDb.findOne({'id' : data[i]['userId']}).then((res) => {
+                
+        //         data[i]['userId'] = data[i].userId +'-' + res.username;
+        //     })
+
+          
+
+      // }
+        res.status(200).send(response['review']);
        
     }).catch((err) => {
         res.status(500).send(err);

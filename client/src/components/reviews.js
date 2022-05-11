@@ -79,18 +79,25 @@ function Review(props) {
 
 
   return (
-    <div> 
+    <div className='reviews'> 
         <h1>Reviews</h1>
+
+        <button onClick={() => {setReviewAvailable(true)}}>Review</button>
+        {reviewAvailable && submitReview}
+
         {
           reviews.map((review,index) => {
 
             const {text,userId} = review;
-            return (<p key={index}>{`${userId} : ${text}`}</p>)
+            return (<div key={index} className='review' >
+                <h5>{userId}</h5>
+                <p >{text}</p>
+            </div>
+            )
             
           })  
         }
-        <button onClick={() => {setReviewAvailable(true)}}>Review</button>
-        {reviewAvailable && submitReview}
+        
     </div>
   )
 }
