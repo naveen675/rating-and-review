@@ -88,17 +88,20 @@ router.post('/session', (req,res) => {
     const data = req.body;
     const {username,password} = data;
 
-    userCredentials.findOne({'username' : username, 'password' : password}).then((data) => {
+    userCredentials.findOne({'username' : username}).then((data) => {
 
         if(! data){
 
             res.status(401).send('User Doesnt exist');
         }
-        else {
+        else if(data['password'] === password ) {
 
             req.session.userId = data['_id'];
             
             res.status(200).send("User Logged In");
+        }
+        else{
+            res.status(404).send("Not Found");
         }
     }).catch((err) => {
         res.status(500).send(err);
@@ -109,6 +112,27 @@ router.post('/session', (req,res) => {
 router.get('/currentSession', auth.authenticate,(req,res) => {
 
     res.status(200).send(req.session.userId);
+})
+
+
+router.get('/me', (req,res) => {
+
+    const userid = req.userId;
+
+    User.findOne({'_id' : userid}).then((data) => {
+
+        if(! data){
+
+            res.status(401).send('User Doesnt exist');
+        }
+        else {
+            
+            res.status(200).send(data);
+        }
+    }).catch((err) => {
+        res.status(500).send(err);
+    })
+
 })
 
 module.exports = router;

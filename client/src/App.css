@@ -90,9 +90,15 @@
   padding: 50px;
 }
 
-body{
+body
+{
   background-color: #0E1117;
   color: white;
+}
+
+body input{
+  border: 0;
+  border-radius: 2px;
 }
 
 .movielist button{
@@ -125,6 +131,20 @@ body{
   padding-left: 40px;
 }
 
+.movie button{
+
+  border : 0;
+  border-radius: 5px;
+  margin-right: 80px;
+  background-color: #0F1117;
+  font-family: "Nunito Sans", sans-serif;
+  color: #57A6FF;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+
 .movie iframe{
   margin-top : 40px;
   border: 0;
@@ -132,6 +152,117 @@ body{
   width: 70%;
   
 }
+
+.reviews .review h4{
+
+  color: #57A6FF;
+}
+
+.reviews h1{
+
+  color: #57A6FF;
+}
+
+.ratingForm {
+  position: absolute;
+  margin-top: 20px;
+  text-align: center;
+  margin-left: 40%;
+  height: 40px;
+
+}
+
+.ratingForm button{
+  border : 0;
+  border-radius: 5px;
+  background-color: #0F1117;
+  font-family: "Nunito Sans", sans-serif;
+  color: #57A6FF;
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  font-size: 20px;
+
+}
+
+.reviewBox{
+
+  position: absolute;
+  right : 20rem;
+  top : 55rem;
+  height: 150px;
+  width:300px;
+  margin-left: 60%;
+}
+
+#reviewBtn{
+
+  margin-left: 80%;
+  border : 0;
+  border-radius: 5px;
+  background-color: #0F1117;
+  font-family: "Nunito Sans", sans-serif;
+  color: #57A6FF;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.reviewBox textarea{
+
+  height:100px;
+  width: 250px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.reviewBox button{
+
+  border : 0;
+  border-radius: 5px;
+  margin-right: 80px;
+  background-color: #0F1117;
+  font-family: "Nunito Sans", sans-serif;
+  color: #57A6FF;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+.loginInput{
+
+  margin-top: 100px;
+  text-align: center;
+  border: #61dafb;
+  border-width: 10px solid;
+}
+
+
+.login table{
+
+  margin-left: 40%;
+
+}
+
+.login #loginBtn {
+
+  border : 0;
+  border-radius: 5px;
+  background-color: black;
+  font-family: "Nunito Sans", sans-serif;
+  color: white;
+  cursor: pointer;
+  
+  margin-top: 5px;
+  font-size: 15px;
+}
+#clickHere{
+  border: 0;
+  background-color: #0F1117;
+  color: #57A6FF;
+  cursor: pointer;
+}
+
 
 .footer{
   position:sticky;

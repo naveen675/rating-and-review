@@ -8,9 +8,14 @@ function Login(props) {
 
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
-    const status = props.status;
     const navigate = useNavigate();
 
+
+    const HandleReset = () => {
+        
+        setPassword('');
+        setUsername('');    
+    }
 
     const HandleClick = () => {
 
@@ -35,11 +40,14 @@ function Login(props) {
             fetch(url,requestOptions).then((response) => {
                 
                 if(response.status === 200){
-                    status = "Logout";
                     navigate(`/profile`);
                 }
-                else{
-                    alert('User Doesn Exist');
+                else if(response.status === 404){
+                    alert('Wrong Password');
+                }
+                else if(response.status === 401){
+                    alert('User Doesn Exist Please Register');
+
                 }
             }).catch((err) => {
                 console.log(`Error Occured ${err}`);
@@ -49,18 +57,32 @@ function Login(props) {
         Session();
     }
 
+    
+
 
   return (
     <>
   
     <div className='login'>
-        <label >username : </label>
-        <input type='text' onChange={(event) => {setUsername(event.target.value)}}></input> <br></br>
-        <label>Password : </label>
-        <input type='text' onChange={(event) => {setPassword(event.target.value)}}></input>
-        <button onClick={() => {HandleClick()}} >Login</button><br />
-        <p>New User ?</p>
-        <button onClick={() => {navigate(`/register`)}}>Click Here</button>
+        <h1>Login</h1>
+        <div className='loginInput'>
+            <table>
+                <tr>
+                    <td><label >Username : </label></td>
+
+                    <td><input type='text' onChange={(event) => {setUsername(event.target.value)}}></input></td>
+                </tr>
+                <tr>
+                    <td><label>Password : </label></td>
+                    <td><input type='text' onChange={(event) => {setPassword(event.target.value)}}></input></td>
+                </tr>
+                
+            </table>
+            <button id="loginBtn" onClick={() => {HandleClick()}} >Login</button>
+            {/* <button onClick={HandleReset}>Reset</button> */}
+            
+            <p>New User ? <button id='clickHere' onClick={() => {navigate(`/register`)}}>Click Here</button></p>
+        </div>
     </div>
     </>
   )

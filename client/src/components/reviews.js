@@ -70,9 +70,10 @@ function Review(props) {
 
 
     const submitReview = (
-        <div>
-            <input type='text' onChange={(event) => {setInput(event.target.value)}}></input>
+        <div className='reviewBox'>
+            <textarea onChange={(event) => {setInput(event.target.value)}}></textarea><br></br>
             <button onClick={HandleSubmit}>Submit</button>
+            <button onClick={() => {setReviewAvailable(false);}}>Cancel</button>
         </div>
     )
     
@@ -82,7 +83,7 @@ function Review(props) {
     <div className='reviews'> 
         <h1>Reviews</h1>
 
-        <button onClick={() => {setReviewAvailable(true)}}>Review</button>
+        <button id="reviewBtn" onClick={() => {setReviewAvailable(true)}}>Write A Review</button>
         {reviewAvailable && submitReview}
 
         {
@@ -90,7 +91,7 @@ function Review(props) {
 
             const {text,userId} = review;
             return (<div key={index} className='review' >
-                <h5>{userId}</h5>
+                <h4>{userId}</h4>
                 <p >{text}</p>
             </div>
             )
