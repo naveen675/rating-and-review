@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import Header from './header';
+import {hashString} from 'react-hash-string';
+
 
 function Register(props) {
 
     const status = props.status;
+
 
 
     const [firstname,setFirstname] = useState('');
@@ -16,54 +19,90 @@ function Register(props) {
     const navigate = useNavigate();
 
     const HandleClick = () => {
+
+
         
-        const url = '/api/users/user';
+          if(username === ''){
+        
+            alert('Username Cannot be empty');
 
-        const data = {
-
-            "firstname" : firstname,
-            "lastname" : lastname,
-            "gmail" : gmail,
-            "username" :username,
-            "password" : password
         }
+        else if(password === ''){
+        
+            alert("Password Cannot be Empty");
 
-        const requestOptions = {
+    }
+        else{
+            const url = '/api/users/user';
 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        }
+           
 
-        const createUser = () => {
+            const data = {
 
-            fetch(url,requestOptions).then((response) => {
-            if(response.status === 201){
-                navigate(`/session`);
+                "firstname" : firstname,
+                "lastname" : lastname,
+                "gmail" : gmail,
+                "username" :username,
+                "password" : hashString(password)
             }
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
-        createUser();
-    }
+
+            const requestOptions = {
+
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }
+
+            const createUser = () => {
+
+                fetch(url,requestOptions).then((response) => {
+                
+                if(response.status === 200){
+                    alert('Username Already Exists')
+                }
+                else if(response.status === 201){
+                    navigate(`/session`);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+            createUser();
+        }
+}
 
   return (
 
     <React.Fragment>
+        
      <div className='register'>
 
-        <label>Firstname : </label>
-        <input type='text' onChange={(event) => {setFirstname(event.target.value)}}></input> <br></br>
-        <label>Lastname : </label>
-        <input type='text' onChange={(event) => {setLastname(event.target.value)}}></input><br />
-        <label >Gmail : </label>
-        <input type='text' onChange={(event) => {setGmail(event.target.value)}}></input> <br></br>
-        <label>Username : </label>
-        <input type='text' onChange={(event) => {setUsername(event.target.value)}}></input> <br></br>
-        <label>Password : </label>
-        <input type='text' onChange={(event) => {setPassword(event.target.value)}}></input> <br />
-        <button onClick={() => {HandleClick()}} >Register</button><br />
+         <h1>SignUp</h1>
+        <table>
+            <tr>
+                <td><label>Firstname : </label></td>
+                <td><input type='text' onChange={(event) => {setFirstname(event.target.value)}}></input></td> 
+            </tr>
+            <tr>
+                <td><label>Lastname : </label></td> 
+                <td><input type='text' onChange={(event) => {setLastname(event.target.value)}}></input></td>
+            </tr>
+            <tr>
+                <td><label >Gmail : </label></td>
+                <td><input type='text' onChange={(event) => {setGmail(event.target.value)}}></input></td> 
+            </tr>
+            <tr>
+                <td><label>Username : </label></td>
+                <td><input type='text' onChange={(event) => {setUsername(event.target.value)}}></input> </td>
+            </tr>
+            <tr>
+                <td><label>Password : </label></td>
+                <td><input type='password' onChange={(event) => {setPassword(event.target.value)}}></input> </td>
+            </tr>
+            <tr>
+                <button id='registerbtn' onClick={() => {HandleClick()}} >Register</button>
+            </tr>
+        </table>
 
     </div>
 

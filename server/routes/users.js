@@ -14,6 +14,13 @@ router.post('/user', (req,res) => {
     const data = req.body;
     const {username,password,firstname,lastname,gmail} = data;
 
+     UserCredDb.findOne({'username' : username}).then((data) => {
+
+        if(data){
+            res.status(200).send();
+        }
+     })
+
     const credentials = new UserCredDb({
         'username' : username,
         'password' : password
@@ -87,16 +94,18 @@ router.post('/session', (req,res) => {
 
     const data = req.body;
     const {username,password} = data;
+    console.log("session");
 
-    userCredentials.findOne({'username' : username}).then((data) => {
+    userCredentials.findOne({'username' : username}).then((response) => {
 
-        if(! data){
+       
+        if(! response){
 
-            res.status(401).send('User Doesnt exist');
+            res.status(401).send('User Doesnt exist').send();
         }
-        else if(data['password'] === password ) {
+        else if(response['password'] == password ) {
 
-            req.session.userId = data['_id'];
+            req.session.userId = response['_id'];
             
             res.status(200).send("User Logged In");
         }

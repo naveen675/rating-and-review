@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import fetch from 'node-fetch';
 import {Navigate, useNavigate} from 'react-router-dom';
+import {hashString} from 'react-hash-string';
 
 
 function Login(props) {
@@ -11,51 +12,61 @@ function Login(props) {
     const navigate = useNavigate();
 
 
-    const HandleReset = () => {
-        
-        setPassword('');
-        setUsername('');    
-    }
-
     const HandleClick = () => {
 
-    const url = '/api/users/session';
+    
+   
 
-    const data = {
-            "username" :username,
-            "password" : password
-        }
+    if(username === ''){
+        alert('Username Cannot be empty');
 
-    const requestOptions = {
-
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-        }
-
-    const Session = () => {
-
-        
-
-            fetch(url,requestOptions).then((response) => {
-                
-                if(response.status === 200){
-                    navigate(`/profile`);
-                }
-                else if(response.status === 404){
-                    alert('Wrong Password');
-                }
-                else if(response.status === 401){
-                    alert('User Doesn Exist Please Register');
-
-                }
-            }).catch((err) => {
-                console.log(`Error Occured ${err}`);
-            })
-        }
-
-        Session();
     }
+    else if(password === ''){
+        alert("Password Cannot be Empty");
+
+    }
+
+    else{
+
+        const url = '/api/users/session';
+
+        const data = {
+            "username" :username,
+            "password" : hashString(password)
+        }
+
+        console.log(data["password"]);
+        console.log(data["username"]);
+
+        const requestOptions = {
+
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+            }
+
+        const Session = () => {
+
+                    fetch(url,requestOptions).then((response) => {
+                    
+                    if(response.status === 200){
+                        navigate(`/profile`);
+                    }
+                    else if(response.status === 404){
+                        alert('Wrong Password');
+                    }
+                    else if(response.status === 401){
+                        alert('User Doesn Exist Please Register');
+
+                    }
+                }).catch((err) => {
+                    console.log(`Error Occured ${err}`);
+                })
+            }
+
+            Session();
+        }
+}
 
     
 
@@ -74,7 +85,7 @@ function Login(props) {
                 </tr>
                 <tr>
                     <td><label>Password : </label></td>
-                    <td><input type='text' onChange={(event) => {setPassword(event.target.value)}}></input></td>
+                    <td><input type='password' onChange={(event) => {setPassword(event.target.value)}}></input></td>
                 </tr>
                 
             </table>

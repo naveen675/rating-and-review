@@ -18,7 +18,6 @@ router.put('/',auth.authenticate,(req,res) => {
     const review = {userId : userId,
                     text : text
     };
-    console.log(review)
     
     movieDb.findOneAndUpdate({'_id' : movieId},{$addToSet : {review : review}}).then((response) => {
         res.status(204).send('Update Completed');
@@ -34,26 +33,33 @@ router.get('/:movieId', (req,res) => {
     const {movieId} = req.params;
     const currentUser = req.session.userId;
  
-
+    var final = [];
     movieDb.findOne({'_id': movieId}).then((response) => {
 
-       // var data = response['review'];
-
-        //console.log(data);
-
-        // for(var i =0; i<data.length;i++){
-            
-        //     userDb.findOne({'id' : data[i]['userId']}).then((res) => {
-                
-        //         data[i]['userId'] = data[i].userId +'-' + res.username;
-        //     })
-
-          
-
-      // }
-        res.status(200).send(response['review']);
+       var data = response['review'];
        
-    }).catch((err) => {
+       for(var i=0;i<data.length;i++){
+
+            var id = data[i]['userId'];
+            var text = data[i]['text'];
+            var temp = {
+                'username' : "",
+                'text' : ""
+            };
+                
+
+            userDb.findOne({'id' : id}).then((r) => {
+                temp['username'] = r.username;
+                temp['text'] = text;
+                console.log(temp);
+            })
+
+            
+       }
+
+
+       
+    }).then((final) => {res.send(final)}).catch((err) => {
         res.status(500).send(err);
     })
 })

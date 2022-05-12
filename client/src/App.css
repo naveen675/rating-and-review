@@ -228,6 +228,14 @@ body input{
   font-size: 18px;
 }
 
+.login{
+
+  margin-top: 100px;
+  text-align: center;
+}
+
+
+
 
 .loginInput{
 
@@ -261,6 +269,32 @@ body input{
   background-color: #0F1117;
   color: #57A6FF;
   cursor: pointer;
+}
+
+.register{
+  text-align: center;
+  margin-top: 100px;
+}
+
+
+
+
+.register table{
+  margin-left: 35%;
+  margin-top: 50px;
+}
+
+#registerbtn{
+  margin-left: 80%;
+  border : 0;
+  border-radius: 5px;
+  background-color: black;
+  font-family: "Nunito Sans", sans-serif;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
+  font-size: 15px;
+
 }
 
 
