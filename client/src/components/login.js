@@ -12,6 +12,8 @@ function Login(props) {
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const navigate = useNavigate();
+    const {user,setUser} = props;
+ 
 
 
     const HandleClick = () => {
@@ -51,8 +53,9 @@ function Login(props) {
                     fetch(url,requestOptions).then((response) => {
                     
                     if(response.status === 200){
-                   
-                        navigate(`/profile`);
+                        
+                        setUser(username);
+                        navigate(`/`);
                     }
                     else if(response.status === 404){
                         alert('Wrong Password');

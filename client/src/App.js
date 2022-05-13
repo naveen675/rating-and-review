@@ -9,14 +9,17 @@ import Register from './components/signup';
 import Header from './components/header';
 import Review from './components/reviews';
 import Footer from './components/footer';
+import { useState } from 'react';
 
 function App() {
 
+  const [user,setUser] = useState('');
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header user ={user} setUser ={setUser} />
       <Routes>
-        <Route path='/session' element={<Login />}></Route>
+        <Route path='/session' element={<Login setUser = {setUser} /> } />
         <Route path='/movie/:_id' element={<Movie />}></Route>
         <Route path='/' element={<Home />}></Route>
         <Route path='/profile' element={<Profile />}></Route>

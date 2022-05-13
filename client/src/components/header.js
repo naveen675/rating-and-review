@@ -8,11 +8,10 @@ import Entertainment from '../Images/entertainmenr.jpeg'
 function Header(props) {
     
   
-    
-
     const navigate = useNavigate();
     const [loginStatus, setLoginStatus] = useState(false);
     const data = {};
+    const {user,setUser} = props;
 
     const HandleClick = () => {
 
@@ -31,7 +30,7 @@ function Header(props) {
           fetch(url,requestOptions).then((response) => {
 
               if(response.status === 204){
-
+                  setUser('');
                   navigate('/session/');
               }
           }).catch((err) => {
@@ -65,7 +64,8 @@ function Header(props) {
     <div className='header'>
       
       <div className='left'>
-        <img src={Entertainment} alt="entertainment" />
+        <div className='item' ><button onClick={() => {navigate('/')}}><img src={Entertainment} alt="entertainment" /></button></div>
+        <div className='item' ><p>{user}</p></div>
       </div>
       <h1>
         Entertainment

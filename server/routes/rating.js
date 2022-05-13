@@ -48,7 +48,7 @@ router.get('/:ID',(req,res) => {
     movieDb.findOne({'_id':movieId}).then((response) => {
 
         res.status(200).send({'rating' : response['rating']});
-        // console.log(response['rating']);
+       
     }).catch((err) => {
         res.status(500).send(err);
     })

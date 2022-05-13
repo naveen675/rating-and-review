@@ -42,7 +42,7 @@
   display: flex;
   position: fixed;
   top: 0;
-  height: 55px;
+  height: 60px;
   width: 100%;
   z-index: 8;
   box-shadow: 0 2px 5px 2px rgb(0 0 0 / 15%);
@@ -56,11 +56,19 @@
 
 .header img{
 
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 2.8rem;
+  width: 2.8rem;
   border-radius: 100%;
 
 }
+
+/* .header img button{
+
+  height: 3rem;
+  width: 3.5rem;
+  border-radius: 100%;
+
+} */
 .header button{
   padding: 12px;
   margin-right: 20px;
@@ -69,6 +77,14 @@
   color: white;
   font-size: 17px;
   cursor: pointer;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.header .left{
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5rem;
 }
 
 .content{

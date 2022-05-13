@@ -6,8 +6,6 @@ const userDb = require('../models/users');
 router.use(express.json());
 const auth = require('../middleware/auth');
 
-
-
 router.put('/',auth.authenticate,(req,res) => {
 
     const data  = req.body;
@@ -15,13 +13,7 @@ router.put('/',auth.authenticate,(req,res) => {
     const {movieId,text} = data;
     const userId = req.session.userId;
     const username = req.session.username;
-
-    // movieDb.findOne({'_id' : movieId}.then((data) => {
-    //     console.log(data);
-    // })
-
-    // movieDb.find({ review: { $all: [userId] } } ).then((data) => console.log(data));
-
+  
 
     const review = {userId : userId,
                     username : username,
@@ -69,5 +61,35 @@ router.delete('/me', auth.authenticate,(req,res) => {
 })
 
 })
+
+router.post('/me',auth.authenticate, (req,res) => {
+
+
+    const {movieId} = req.body;
+    const userId = req.session.userId;
+
+        movieDb.find(
+
+           { "_id": movieId,
+
+            "review": {
+                "$elemMatch": {
+                    "userId": userId,
+                }
+            }
+        }).then((data) => {
+        if(data.length>0) {
+   
+        res.status(200).send();
+}
+        else if(data.length === 0){
+
+            res.status(204).send();
+        }
+}).catch((err) => {
+    res.status(500).send(err);
+})
+
+});
 
 module.exports = router;

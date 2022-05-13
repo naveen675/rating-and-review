@@ -94,7 +94,7 @@ router.post('/session', (req,res) => {
 
     const data = req.body;
     const {username,password} = data;
-    console.log("session");
+  
 
     userCredentials.findOne({'username' : username}).then((response) => {
 

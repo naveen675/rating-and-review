@@ -63,6 +63,7 @@ function Review(props) {
         }
 
 
+
         fetch(url,requestOptions).then((response) => {
             
             setReviewAvailable(false);
@@ -120,6 +121,39 @@ function Review(props) {
 
     }
 
+    const CheckForUser = () => {
+
+       const url = '/api/review/me';
+
+       const data = {
+            "movieId" :movieId
+        }
+
+        const requestOptions = {
+
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+        }
+
+        fetch(url,requestOptions).then((response) => {
+
+            if(response.status === 401 ){
+
+                alert("Session Expired Login Again");
+            }
+
+            else if(response.status === 200){
+                alert("Review Already Submitted Delete current review to Submit new");
+            }
+
+            else if(response.status === 204){
+                setReviewAvailable(true);
+            }
+            
+        })
+    }
+
     const submitReview = (
         <div className='reviewBox'>
             <textarea onChange={(event) => {setInput(event.target.value)}}></textarea><br></br>
@@ -135,7 +169,7 @@ function Review(props) {
     <div className='reviews'> 
         <h1>Reviews</h1>
 
-        <button id="reviewBtn" onClick={() => {setReviewAvailable(true)}}>Write Review</button>
+        <button id="reviewBtn" onClick={() => {CheckForUser()}}>Write Review</button>
         {reviewAvailable && submitReview}
 
         {
