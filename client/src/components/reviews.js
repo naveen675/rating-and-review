@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import fetch from 'node-fetch';
 import { useNavigate } from 'react-router-dom';
+import person from "../Images/person.png";
 
 
 function Review(props) {
@@ -11,6 +12,7 @@ function Review(props) {
     const [reviewAvailable,setReviewAvailable] = useState(false);
     const [input,setInput] = useState('');
     const [reviews,setReviews] = useState([]);
+    const [currentUser, setCurrentUser] = useState();
 
 
     const fetchReviews = () => {
@@ -18,14 +20,30 @@ function Review(props) {
         fetch(`/api/review/${movieId}`).then((response) => {
             return response.json();
         }).then((data) => {
-            console.log(data);
+            
             setReviews(data);
         })
 
     }
 
+    const fetchCurrentUser = () => {
+
+        const url = '/api/sessions/currentSession';
+
+        fetch(url).then(
+            (response) => {
+
+                return response.json();
+           
+    }).then((data) => {setCurrentUser(data['userId'])} );
+}
+
+    
+
     useEffect(() => {
         fetchReviews();
+        fetchCurrentUser();
+        
     },[]);
    
     const HandleSubmit = () => {
@@ -57,8 +75,9 @@ function Review(props) {
                 navigate('/session');
                 
             }
+
         }).catch((err) => {
-            console.log(err)
+            console.log(err);
         })
 
 
@@ -66,8 +85,40 @@ function Review(props) {
 
     }
 
+    const RemoveReview = (userId) => {
 
 
+        const url ='/api/review/me';
+
+       const data = {
+            "movieId" :movieId,
+            "userId" : userId
+        }
+
+        const requestOptions = {
+
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+        }
+
+
+        fetch(url,requestOptions).then((response) => {
+            
+            if(response.status === 204){
+                
+                fetchReviews();
+            }
+            else if(response.status === 401){
+                alert('Session expired login Again');
+                navigate('/session');
+                
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    }
 
     const submitReview = (
         <div className='reviewBox'>
@@ -76,23 +127,27 @@ function Review(props) {
             <button onClick={() => {setReviewAvailable(false);}}>Cancel</button>
         </div>
     )
-    
+
+   
 
 
   return (
     <div className='reviews'> 
         <h1>Reviews</h1>
 
-        <button id="reviewBtn" onClick={() => {setReviewAvailable(true)}}>Write A Review</button>
+        <button id="reviewBtn" onClick={() => {setReviewAvailable(true)}}>Write Review</button>
         {reviewAvailable && submitReview}
 
         {
           reviews.map((review,index) => {
 
-            const {text,userId} = review;
+            const {text,username,userId} = review;
             return (<div key={index} className='review' >
-                <h4>{userId}</h4>
-                <p >{text}</p>
+                <h4><img src={person} />{username || "Unknown"}</h4>
+                <p>{text}</p>
+                
+                {(currentUser === userId ) && <button id="DeleteBtn" onClick={() => {RemoveReview(userId)}}>Delete</button>}
+                
             </div>
             )
             

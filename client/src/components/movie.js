@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useParams,useNavigate} from 'react-router-dom';
 import Form from './form';
+import Header from './header';
 import Review from '../components/reviews';
 
 function Movie() {
@@ -39,27 +40,45 @@ function Movie() {
     const rating_count = movie.rating_count;
     const id = movie._id;
     const reviews = movie.review;
+    const director = movie.director;
+    const actors = movie.actors;
     const videoUrl = `https://www.youtube.com/embed/${movie.video_url}`;
 
 
     
     return (
+        <React.Fragment>
     <div className='movie'>
 
 
         <h1>{title}</h1>
         <iframe src={videoUrl}></iframe>        
-        <p>{`Year ${year}`}</p>
-        { average_rating > 0 ? <span className='rating'>&#11088;{average_rating}</span>  : ""}
-        <button><span className='rating' onClick={() => {setFormVisibility(true)}}>&#9734;</span></button>
+        <br></br>
+        { average_rating > 0 ? <span className='rating'>&#11088;{average_rating}{'/10'} </span>  : ""}
+        <button><span className='rating' onClick={() => {setFormVisibility(true)}}>&#9734;</span></button><p className='ratingCount'>{`${rating_count} ratings` }</p>
         {formVisibility && <Form setFormVisibility = {setFormVisibility} _id={_id} value={2} />}
-        <p className='ratingCount'>{`${rating_count} ratings` }</p>
+        
+         <table>
+             <tr>
+                 <td><p>{`Year : ${year}`}</p></td>
+             </tr>
+             <hr></hr>
+            <tr>
+                <td><p>DIRECTOR : {director}</p></td>
+            </tr>
+            <hr></hr>
+            <tr>
+                <td><p>ACTORS : {actors}</p></td>
+            </tr>
+        </table>
+        
     <div className='reviews'>
 
         <Review reviews={reviews} movieId={id} />
 
     </div>
     </div>
+    </React.Fragment>
   )
 }
 

@@ -1,13 +1,16 @@
 import React, { useState,useEffect } from 'react';
 import fetch from 'node-fetch';
 import Rating from './rating';
+import Header from './header';
 import { useNavigate,Link } from 'react-router-dom';
+import SearchIcon from '../Images/search-24px.svg';
 
 
-function Movies() {
+function Movies(props) {
+
 
     const navigate = useNavigate();
-
+    const [searchWord,setSearchWord] = useState('');
     const [movies,setMovies] = useState([]);
 
     const Getmovies = () => {
@@ -24,9 +27,43 @@ function Movies() {
         Getmovies();
     },[]);
 
+    const WordMatch = (event) => {
+
+    setSearchWord(event.target.value);
+
+    
+    if(searchWord === ''){
+
+      Getmovies();
+    }
+
+    
+
+    else{
+        var newMovies= [];
+        // console.log(word);
+
+        newMovies = movies.filter((movie) => {
+        return (movie['title'].toLocaleLowerCase().startsWith(searchWord.toLocaleLowerCase()));
+        })
+
+        setMovies(newMovies);
+        
+        }
+  }
+
 
 
   return (
+    <>
+    <div className='search'>
+
+        <div className='search'>
+          <input type='text' className='searchBox' placeholder='Search For Movie' value={searchWord} onChange={(event) => {setSearchWord(event.target.value)}} />
+          <button className='searchBtn' onClick={(event) => {WordMatch(event)}} ><img src={SearchIcon} alt="search" /></button> 
+        </div>
+
+    </div>
     <div className='movielist'>
       {
           movies.map((movie,index) => {
@@ -46,6 +83,7 @@ function Movies() {
           })
       }
     </div>
+    </>
   )
 }
 

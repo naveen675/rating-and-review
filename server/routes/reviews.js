@@ -14,9 +14,19 @@ router.put('/',auth.authenticate,(req,res) => {
 
     const {movieId,text} = data;
     const userId = req.session.userId;
+    const username = req.session.username;
+
+    // movieDb.findOne({'_id' : movieId}.then((data) => {
+    //     console.log(data);
+    // })
+
+    // movieDb.find({ review: { $all: [userId] } } ).then((data) => console.log(data));
+
 
     const review = {userId : userId,
-                    text : text
+                    username : username,
+                    text : text,
+
     };
     
     movieDb.findOneAndUpdate({'_id' : movieId},{$addToSet : {review : review}}).then((response) => {
@@ -26,42 +36,38 @@ router.put('/',auth.authenticate,(req,res) => {
     })
 } )
 
+var final = [];
 router.get('/:movieId', (req,res) => {
 
   
 
     const {movieId} = req.params;
     const currentUser = req.session.userId;
+    var data = [];
  
-    var final = [];
+    
     movieDb.findOne({'_id': movieId}).then((response) => {
 
-       var data = response['review'];
-       
-       for(var i=0;i<data.length;i++){
+       res.status(200).send(response['review']);
 
-            var id = data[i]['userId'];
-            var text = data[i]['text'];
-            var temp = {
-                'username' : "",
-                'text' : ""
-            };
-                
-
-            userDb.findOne({'id' : id}).then((r) => {
-                temp['username'] = r.username;
-                temp['text'] = text;
-                console.log(temp);
-            })
-
-            
-       }
-
-
-       
-    }).then((final) => {res.send(final)}).catch((err) => {
-        res.status(500).send(err);
     })
+
+})
+
+router.delete('/me', auth.authenticate,(req,res) => {
+
+    const {userId,movieId} = req.body;
+
+    movieDb.updateMany(
+    { '_id' : movieId},
+    { $pull: { review: { userId: userId } } }
+    ).then(
+        (response) => {res.status(204).send(
+    response)}).catch(
+        (err) => {
+    console.log(err);
+})
+
 })
 
 module.exports = router;

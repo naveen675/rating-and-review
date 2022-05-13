@@ -106,6 +106,8 @@ router.post('/session', (req,res) => {
         else if(response['password'] == password ) {
 
             req.session.userId = response['_id'];
+            console.log(username);
+            req.session.username = username;
             
             res.status(200).send("User Logged In");
         }
@@ -118,10 +120,7 @@ router.post('/session', (req,res) => {
 })
 
 
-router.get('/currentSession', auth.authenticate,(req,res) => {
 
-    res.status(200).send(req.session.userId);
-})
 
 
 router.get('/me', (req,res) => {

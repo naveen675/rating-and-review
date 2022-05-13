@@ -6,7 +6,7 @@ import {hashString} from 'react-hash-string';
 
 function Register(props) {
 
-    const status = props.status;
+  
 
 
 

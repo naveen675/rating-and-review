@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import fetch from 'node-fetch';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {hashString} from 'react-hash-string';
+import Header from './header';
+
 
 
 function Login(props) {
@@ -35,8 +37,7 @@ function Login(props) {
             "password" : hashString(password)
         }
 
-        console.log(data["password"]);
-        console.log(data["username"]);
+      
 
         const requestOptions = {
 
@@ -50,6 +51,7 @@ function Login(props) {
                     fetch(url,requestOptions).then((response) => {
                     
                     if(response.status === 200){
+                   
                         navigate(`/profile`);
                     }
                     else if(response.status === 404){
@@ -73,7 +75,7 @@ function Login(props) {
 
   return (
     <>
-  
+ 
     <div className='login'>
         <h1>Login</h1>
         <div className='loginInput'>

@@ -101,6 +101,48 @@ body input{
   border-radius: 2px;
 }
 
+.search{
+
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 100px;
+  height: 2.5rem;
+  width: 45%;
+  margin-left: 27%;
+  background-color: #0F1117;
+  border-radius: 5px;
+  border: 0;
+}
+
+.searchbox{
+  height: 30px;
+  width: 70%;
+  margin-top: 5px;
+  margin-bottom: 1px;
+  border-radius: 5px;
+  margin-left: 1%;
+  font-size: 15px;
+  border: 0;
+}
+
+.search img{
+  margin-top: 4px;
+}
+
+.search .searchBtn{
+
+  height:100%;
+  width: 20%;
+  cursor: pointer;
+  border: 25px;
+ 
+  background-color: #beb5ee;
+}
+
+.search input{
+  width: 100%;
+}
+
 .movielist button{
 
   border-radius: 2px;
@@ -148,20 +190,33 @@ body input{
 .movie iframe{
   margin-top : 40px;
   border: 0;
-  height: 30rem;
-  width: 70%;
+  height: 25rem;
+  width: 40rem;
   
 }
+
 
 .reviews .review h4{
 
   color: #57A6FF;
+}
+.reviews img{
+  height: 1.5rem;
+  border-radius: 60%;
+  padding: 2px;
+  padding-top: 5px;
+  
+}
+.reviews p{
+  margin-top: -5px;
+  padding-left: 50px;
 }
 
 .reviews h1{
 
   color: #57A6FF;
 }
+
 
 .ratingForm {
   position: absolute;
@@ -182,6 +237,7 @@ body input{
   padding: 5px;
   margin: 5px;
   font-size: 20px;
+  
 
 }
 
@@ -197,7 +253,7 @@ body input{
 
 #reviewBtn{
 
-  margin-left: 80%;
+  margin-left: 60%;
   border : 0;
   border-radius: 5px;
   background-color: #0F1117;
@@ -206,6 +262,7 @@ body input{
   cursor: pointer;
   text-decoration: underline;
   font-size: 18px;
+  height: 2rem;
 }
 
 .reviewBox textarea{
@@ -226,6 +283,14 @@ body input{
   color: #57A6FF;
   cursor: pointer;
   font-size: 18px;
+}
+
+#DeleteBtn{
+
+  height: 2rem;
+  width: 4rem;
+  font-size: 0.75rem;
+  text-decoration: underline;
 }
 
 .login{

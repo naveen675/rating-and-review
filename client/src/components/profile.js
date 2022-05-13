@@ -53,7 +53,7 @@ function Profile() {
 
         const url = '/api/users/me';
        fetch(url).then((response) => {
-            console.log(response);
+           
         })
 
        
