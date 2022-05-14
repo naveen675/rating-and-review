@@ -27,6 +27,42 @@ function Movie() {
         GetMovieInfo();
     },[formVisibility])
 
+
+
+
+    const CheckForUser = () => {
+
+       const url = '/api/rating/me';
+
+       const data = {
+            "movieId" :_id
+        }
+
+        const requestOptions = {
+
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+        }
+
+        fetch(url,requestOptions).then((response) => {
+
+            if(response.status === 401 ){
+
+                alert("Session Expired Login Again");
+            }
+
+            else if(response.status === 200){
+                alert("Rating Already Submitted Thankyou");
+            }
+
+            else if(response.status === 204){
+                setFormVisibility(true);
+            }
+            
+        })
+    }
+
     // useEffect(() => {
     //     setAvgRating(movie.average_rating);
     //     setRatingCount(movie.rating_count);
@@ -52,6 +88,9 @@ function Movie() {
     const videoUrl = `https://www.youtube.com/embed/${movie.video_url}`;
 
 
+
+
+
     
     return (
         <React.Fragment>
@@ -62,7 +101,7 @@ function Movie() {
         <iframe src={videoUrl}></iframe>        
         <br></br>
         { average_rating > 0 ? <span className='rating'>&#11088;{average_rating}{'/10'} </span>  : ""}
-        <button><span className='rating' onClick={() => {setFormVisibility(true)}}>&#9734;</span></button><p className='ratingCount'>{`${rating_count} ratings` }</p>
+        <button><span className='rating' onClick={() => {CheckForUser()}}>&#9734;</span></button><p className='ratingCount'>{`${rating_count} ratings` }</p>
         {formVisibility && <Form setFormVisibility = {setFormVisibility} _id={_id} value={2} />}
         
          <table>

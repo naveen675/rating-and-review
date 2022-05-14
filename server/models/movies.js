@@ -17,7 +17,8 @@ const movie = new Schema({
     average_rating : String,
     rating_count : String,
     review : Array,
-    review_count: String
+    review_count: String,
+    ratings_submitted: Array
 
 })
 

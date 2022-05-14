@@ -7,10 +7,14 @@ function Rating(props) {
     // const [rating,setRating] = useState();
 
     const movie = props.movie;
+    const {_id} = props;
     const {rating} = movie;
     
 
     const [formVisibility,setFormVisibility] = useState(false);
+
+
+
 
 
 

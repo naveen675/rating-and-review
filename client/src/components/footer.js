@@ -15,6 +15,7 @@ function Footer() {
               )
           } )
       }
+      <p className='developer'>By Naveen</p>
     </div>
   )
 }
