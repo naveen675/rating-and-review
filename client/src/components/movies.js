@@ -74,10 +74,14 @@ function Movies(props) {
                   <div key={index} className='movie'>
                     <button onClick={() => {navigate(`/movie/${_id}`)}}>
                         <img src={poster} alt="poster" ></img><br /></button>
-                        <Link  id="movieLink" to='/movie/${_id}' >{title}</Link><br /><br />
-                        { average_rating > 0? <span className='rating'>&#11088;{average_rating} </span> : ""}
-                        <p className='ratingCount'>{`${rating_count} ratings` }</p>
-                        <p>{director}</p>
+                         
+                        <div className='shortInfo'>
+                         <Link  id="movieLink" to='/movie/${_id}' >{title}</Link><br /><br />
+
+                          { average_rating > 0? <span className='rating'>&#11088;{average_rating} </span> : ""}
+                          <p className='ratingCount'>{`${rating_count} ratings` }</p>
+                          <p>{director}</p>
+                        </div>
                   </div>
               )
           })

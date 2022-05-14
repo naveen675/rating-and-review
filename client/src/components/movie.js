@@ -10,6 +10,8 @@ function Movie() {
     const [loading,setLoading] = useState(true);
     const [movie,setMovie] = useState();
     const [formVisibility,setFormVisibility] = useState(false);
+    // const [average_rating,setAvgRating] = useState();
+    // const [rating_count,setRatingCount] = useState();
 
     const GetMovieInfo = () => {
         fetch(`/api/movie/${_id}`).then((response) => {
@@ -25,6 +27,11 @@ function Movie() {
         GetMovieInfo();
     },[formVisibility])
 
+    // useEffect(() => {
+    //     setAvgRating(movie.average_rating);
+    //     setRatingCount(movie.rating_count);
+    // },[movie])
+
     
 
     if(loading){
@@ -36,12 +43,12 @@ function Movie() {
     
     const title = movie.title;
     const year = movie.year;
-    const average_rating = movie.average_rating;
-    const rating_count = movie.rating_count;
     const id = movie._id;
     const reviews = movie.review;
     const director = movie.director;
     const actors = movie.actors;
+    const average_rating = movie.average_rating;
+    const rating_count = movie.rating_count;
     const videoUrl = `https://www.youtube.com/embed/${movie.video_url}`;
 
 

@@ -163,6 +163,7 @@ body input{
 
   border-radius: 2px;
   border: 0;
+  margin-left: 17%;
   background-color: #1A1A1A;
   font-family: "Nunito Sans", sans-serif;
   color: white;
@@ -180,6 +181,12 @@ body input{
   height: 16rem;
   width: 12rem;
   cursor: pointer;
+}
+
+.movielist .movie .shortInfo{
+  
+  text-align: center;
+  
 }
 
 .movie{
@@ -206,8 +213,8 @@ body input{
 .movie iframe{
   margin-top : 40px;
   border: 0;
-  height: 25rem;
-  width: 40rem;
+  height: 30rem;
+  width: 50rem;
   
 }
 
@@ -236,10 +243,11 @@ body input{
 
 .ratingForm {
   position: absolute;
-  margin-top: 20px;
   text-align: center;
-  margin-left: 40%;
-  height: 40px;
+  padding-top: 150px;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(8px);
 
 }
 
@@ -260,11 +268,10 @@ body input{
 .reviewBox{
 
   position: absolute;
-  right : 20rem;
-  top : 55rem;
-  height: 150px;
-  width:300px;
-  margin-left: 60%;
+  height: 100%;
+  width:100%;
+  backdrop-filter: blur(8px);
+  text-align: center;
 }
 
 #reviewBtn{
@@ -286,6 +293,7 @@ body input{
   height:100px;
   width: 250px;
   border: 0;
+  margin-right: 8%;
   border-radius: 5px;
 }
 
@@ -314,8 +322,6 @@ body input{
   margin-top: 100px;
   text-align: center;
 }
-
-
 
 
 .loginInput{
@@ -392,4 +398,156 @@ body input{
 .footer img{
   height: 2.5em;
   border-radius: 50%;
+}
+
+
+
+
+@media screen and (max-width: 480px){
+
+  /* body{
+    height: 100%;
+    width: 95%;
+  } */
+  
+  /* .movielist{
+    display: flex;
+    flex-wrap: wrap;
+  } */
+
+  body{
+    margin-left: -10px;
+  }
+
+  .movie iframe{
+
+  margin-top : 40px;
+  border: 0;
+  height: 12rem;
+  width: 17rem;
+  
+}
+  .movie{
+    font-size: 0.7rem;
+  }
+  .header{
+    font-size: 0.5rem;
+    width: 100%;
+  }
+  .header img{
+    height: 2.5rem;
+  }
+
+  .header .left{
+  margin-left: -12px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  font-size: 0.7rem;
+}
+
+
+
+  .login table{
+
+  margin-left: 20%;
+}
+
+.loginInput{
+  margin-bottom: 400px;
+}
+
+.search{
+
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 100px;
+  height: 2rem;
+  width: 80%;
+  margin-left: 10%;
+  background-color: #0F1117;
+  border-radius: 5px;
+  border: 0;
+}
+
+.movielist {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.movielist .movie{
+  display: block;
+  /* margin-left: -7px; */
+  margin-top : 20px;
+  padding: 5px;
+}
+
+.movielist button{
+
+  border-radius: 2px;
+  border: 0;
+  background-color: #1A1A1A;
+  margin-right: -5px;
+  margin-left: 12px;
+  font-family: "Nunito Sans", sans-serif;
+  color: white;
+}
+
+#movieLink{
+
+  padding: 20px;
+  color: white;
+  font-size: 0.5rem;
+}
+
+.movielist button img{
+
+  height: 7rem;
+  width: 5rem;
+  
+  cursor: pointer;
+}
+
+.movie{
+
+  font-family: "Nunito Sans", sans-serif;
+  margin-top: 100px;
+}
+
+.movielist .movie .shortInfo{
+  
+  text-align: center;
+  margin-left: -20px;
+}
+
+
+.register table{
+  margin-left: 20%;
+  margin-top: 50px;
+}
+
+.register{
+  font-size: 0.7rem;
+  margin-bottom: 400px;
+}
+
+.reviewBox{
+
+  position: absolute;
+  height: 100%;
+  width:100%;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.reviewBox textarea{
+
+  height:100px;
+  width: 250px;
+  border: 0;
+  margin-right: 12%;
+  border-radius: 5px;
+}
+
 }

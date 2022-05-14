@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom';
 import './frm.css';
 
 
-
 function Form(props) {
 
     const {_id,setFormVisibility,value} = props;
@@ -13,6 +12,7 @@ function Form(props) {
     const Star = ({ marked, starId }) => {
 
     return (
+
         <span style={{ cursor:"pointer"}} data-star-id={starId} className="star" role="button">
         {marked ? '\u2605' : '\u2606'}
         </span>
@@ -25,6 +25,7 @@ function Form(props) {
     const [selection, setSelection] = React.useState(0);
 
     const hoverOver = event => {
+
         let val = 0;
         if (event && event.target && event.target.getAttribute('data-star-id'))
         val = event.target.getAttribute('data-star-id');
@@ -97,7 +98,7 @@ function Form(props) {
     return (
         <div className='ratingForm' >
             <React.Fragment>
-                <StarRating value={value} />
+                <StarRating claName='form' value={value} />
                 <div>
                     <button onClick={() => {HandleClick(rating)}}>Submit</button>
                     <button onClick={() => {setFormVisibility(false)}}>Cancel</button>
