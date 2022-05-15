@@ -85,6 +85,8 @@ function Movie() {
     const actors = movie.actors;
     const average_rating = movie.average_rating;
     const rating_count = movie.rating_count;
+    const desc = movie.description;
+    const genre = movie.genre;
     const videoUrl = `https://www.youtube.com/embed/${movie.video_url}`;
 
 
@@ -101,12 +103,18 @@ function Movie() {
         <iframe src={videoUrl}></iframe>        
         <br></br>
         { average_rating > 0 ? <span className='rating'>&#11088;{average_rating}{'/10'} </span>  : ""}
-        <button><span className='rating' onClick={() => {CheckForUser()}}>&#9734;</span></button><p className='ratingCount'>{`${rating_count} ratings` }</p>
+        <button><span className='rating' onClick={() => {CheckForUser()}}>&#9734; rate</span></button><p className='ratingCount'>{`${rating_count} ratings` }</p>
         {formVisibility && <Form setFormVisibility = {setFormVisibility} _id={_id} value={2} />}
         
          <table>
              <tr>
                  <td><p>{`Year : ${year}`}</p></td>
+             </tr>
+
+             <hr></hr>
+
+             <tr>
+                 <td><p>ABOUT : {desc}</p></td>
              </tr>
              <hr></hr>
             <tr>
@@ -116,6 +124,11 @@ function Movie() {
             <tr>
                 <td><p>ACTORS : {actors}</p></td>
             </tr>
+            <hr></hr>
+            <tr>
+                <td><p>GENRE : {genre}</p></td>
+            </tr>
+           
         </table>
         
     <div className='reviews'>
