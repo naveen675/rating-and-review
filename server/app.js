@@ -31,6 +31,7 @@ db.connect({username,password,database}).then(() => {
     app.use('/api', session({
         genid : (req) => {
             return uuid();
+            //req
         },
         store : new MongoStore({client: db.getClient()}),
         secret : secret,
